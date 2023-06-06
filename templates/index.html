@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Music Genre Predictor
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        html,body {
+  background-image: url("/static/background.jpeg");
+  background-repeat: repeat;
+  background-size: cover;
+}
+.navbar {
+  overflow: hidden;
+  background-color:rgba(0,0,0,0.2);
+  position: fixed; 
+  top: 0; 
+  width: 100%;
+  height: 75px;
+  left: 0; 
+}
+.genre{
+  top: 35%;
+  left: 3%;
+  position: absolute;
+  font-size: 205%;
+  font-family: "";
+  color:white;
+}
+#message{
+  top: 5%;
+  left: 105%;
+  position: absolute;
+  font-family: "";
+  color:white;
+}
+
+.button:hover {
+  background-color: rgba(64,224,208,0.3); 
+  color: white;
+}
+.button {
+  background-color: turquoise  ;
+  border: none;
+  color: white;
+  top: 130%;
+  border-radius: 10px;
+  right:40%;
+  transition-duration: 0.4s;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  position: absolute;
+}
+
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.guitar
+    {
+      position: absolute;
+      top:45%;
+      left: 120px;
+      width: 150px;
+      height:200px;
+    }
+
+#form{
+position: absolute;
+top: 50%;
+right: 15%;
+}
+
+.navbar a:hover {
+  background: #ddd;
+  color: black;
+}
+
+form{
+  position: absolute;
+  top: 50%;
+  left:80%;
+  margin-top: -100px;
+  margin-left: -250px;
+  width: 500px;
+  height: 200px;
+  border: 4px dashed #fff;
+}
+
+    </style>
+
+</head>
+
+<body>
+  <div class="navbar">
+    <div class = "logo">
+     <img src="/static/LOGO.jpg" style="width:200px;height:75px;">
+     </div>
+</div>
+
+<div class = "genre">Music Genre Classification for<div id="message">ROCK
+<script>
+var i = 1;
+var sampleMessages = [ "METAL", "DISCO", "CLASSICAL", "HIPHOP", "JAZZ", "COUNTRY", "POP", "BLUES", "REGGAE", "ROCK"];
+var x = setInterval(function() {
+    var newText = sampleMessages[i++ % sampleMessages.length];
+    document.getElementById("message").innerHTML = newText;
+    $("#message").fadeOut(500, function () {
+      $(this).text(newText).fadeIn(500);
+    });
+}, 2 * 1000);
+</script>
+</div>
+</div>
+     <form id ="form" method="Post" action="/getYourGenre" enctype="multipart/form-data">
+<center><br>
+        <input type="file"id = "aditya" name="x" accept=".wav, audio/*">
+         <br><br>
+        <input type="submit">
+
+         <h1>Predicted genre is : <i>{{genre}}</i></h1>
+         </center>
+    </form>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h1><p>Predicted genre is : <i>{{genre}}</i></p></h1>
+  </div>
+
+</div>
+  <img src="/static/guitar.png" class = "guitar">
+<br><br><br><br><br>
+    <script type="text/javascript">
+  var modal = document.getElementById("myModal");
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+</script>
+    </body>
+</html>
