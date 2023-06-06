@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Music genre predictor
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        html,body {
+  background-image: url("/static/background.jpeg");
+  background-repeat: repeat;
+  background-size: cover;
+}
+.navbar {
+  overflow: hidden;
+  background-color:rgba(0,0,0,0.2);
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%;
+  height: 75px;
+  left: 0; /* Full width */
+}
+.genre{
+  top: 35%;
+  left: 3%;
+  position: absolute;
+  font-size: 205%;
+  font-family: "Brush Script MT",cursive;
+  color:white;
+}
+#message{
+  top: 5%;
+  left: 105%;
+  position: absolute;
+  font-family: "Brush Script MT",cursive;
+  color:white;
+}
+
+.button:hover {
+  background-color: rgba(64,224,208,0.3); /* Green */
+  color: white;
+}
+.button {
+  background-color: turquoise  ; /* Green */
+  border: none;
+  color: white;
+  top: 130%;
+  border-radius: 10px;
+  right:40%;
+  transition-duration: 0.4s;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  position: absolute;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.guitar
+    {
+      position: absolute;
+      top:45%;
+      left: 120px;
+      width: 150px;
+      height:200px;
+    }
+/* Links inside the navbar */
+#form{
+position: absolute;
+top: 50%;
+right: 15%;
+}
+/* Change background on mouse-over */
+.navbar a:hover {
+  background: #ddd;
+  color: black;
+}
+
+form{
+  position: absolute;
+  top: 50%;
+  left:80%;
+  margin-top: -100px;
+  margin-left: -250px;
+  width: 500px;
+  height: 200px;
+  border: 4px dashed #fff;
+}
+/* form p{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 170px;
+  color: #ffffff;
+  font-family: Arial;
+}
+form input{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+} */
+/* form button{
+  margin: 0;
+  color: #fff;
+  background: #16a085;
+  border: none;
+  width: 508px;
+  height: 35px;
+  margin-top: -20px;
+  margin-left: -4px;
+  border-radius: 4px;
+  border-bottom: 4px solid #117A60;
+  transition: all .2s ease;
+  outline: none;
+}
+form button:hover{
+  background: #149174;
+	color: #0C5645;
+}
+form button:active{
+  border:0;
+} */
+    </style>
+
+</head>
+
+<body>
+  <div class="navbar">
+    <div class = "logo">
+     <img src="/static/LOGO.jpeg" style="width:200px;height:75px;">
+     </div>
+</div>
+
+<div class = "genre">A music genre classification for<div id="message">ROCK
+<script>
+var i = 1;
+var sampleMessages = [ "METAL", "DISCO", "CLASSICAL", "HIPHOP", "JAZZ", "COUNTRY", "POP", "BLUES", "REGGAE", "ROCK"];
+var x = setInterval(function() {
+    var newText = sampleMessages[i++ % sampleMessages.length];
+    document.getElementById("message").innerHTML = newText;
+    $("#message").fadeOut(500, function () {
+      $(this).text(newText).fadeIn(500);
+    });
+}, 2 * 1000);
+</script>
+</div>
+</div>
+     <form id ="form" method="Post" action="/getGenre" enctype="multipart/form-data">
+<center><br>
+        <input type="file"id = "haripriya" name="x" accept=".wav, audio/*">
+         <br><br>
+        <input type="submit">
+
+         <h1>Predicted genre is : <i>{{genre}}</i></h1>
+         </center>
+    </form>
+
+<!-- <form id ="form" method="Post" action="/getGenre" enctype="multipart/form-data">
+
+        <input id="file-upload" type="file" name="x" accept=".wav, audio/*" onclick="function()"><label for="file-upload"><p>Drag your files here or click in this area.</p>
+        </label>
+        <div id="file-upload-filename">
+          <script type="text/javascript">
+          var input = document.getElementById( 'file-upload' );
+          var infoArea = document.getElementById( 'file-upload-filename' );
+
+          input.addEventListener( 'change', showFileName );
+
+          function showFileName( event ) {
+            var input = event.srcElement;
+            var fileName = input.files[0].name;
+            infoArea.textContent = 'File name: '+ fileName;
+          }
+
+          </script>
+    </div>
+
+    <div><br><br><br><br><br><br><br><br>
+   <div class = "button" id="myBtn" onclick="javascript:this.form.submit();"><b>Submit</b></div>
+    </div>
+</form> -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h1><p>Predicted genre is : <i>{{genre}}</i></p></h1>
+  </div>
+
+</div>
+  <img src="/static/guitar.png" class = "guitar">
+<br><br><br><br><br>
+    <script type="text/javascript">
+  var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+</script>
+    </body>
+</html>
