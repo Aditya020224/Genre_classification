@@ -9,7 +9,6 @@ import os
 from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
-folder = "/F:/samples/"
 
 def process_input(audio_file, track_duration):
 
