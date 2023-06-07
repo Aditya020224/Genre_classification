@@ -3,3 +3,4 @@ pandas==1.5.1
 plotly==5.14.1
 scikit-learn==1.0.2
 pip==23.0.1
+tensorflow==2.12.0
