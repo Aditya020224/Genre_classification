@@ -44,8 +44,6 @@ def predict():
         with open(file_path, "wb") as f:
             f.write(file.read())
 
-        track_duration = st.slider("Select track duration (seconds)", min_value=10, max_value=60, step=10, value=30)
-
         mfccs = process_input(file_path, track_duration)
         X_to_predict = mfccs[np.newaxis, ..., np.newaxis]
 
