@@ -14,14 +14,14 @@ def process_input(audio_file, track_duration):
     HOP_LENGTH = 512
     TRACK_DURATION = track_duration
     SAMPLES_PER_TRACK = SAMPLE_RATE * TRACK_DURATION
-    NUM_SEGMENTS = 10
+    NUM_SEGMENTS = 8
 
     samples_per_segment = int(SAMPLES_PER_TRACK / NUM_SEGMENTS)
     num_mfcc_vectors_per_segment = math.ceil(samples_per_segment / HOP_LENGTH)
 
     signal, sample_rate = librosa.load(audio_file, sr=SAMPLE_RATE, mono=True)
 
-    for d in range(10):
+    for d in range(8):
         start = samples_per_segment * d
         finish = start + samples_per_segment
 
