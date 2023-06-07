@@ -7,7 +7,7 @@ import os
 from werkzeug.utils import secure_filename
 
 
-def process_input(audio_file, track_duration):
+def process_input(audio_file):
     SAMPLE_RATE = 22050
     NUM_MFCC = 13
     N_FTT = 2048
