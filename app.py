@@ -44,7 +44,6 @@ def predict():
         with open(file_path, "wb") as f:
             f.write(file.read())
 
-        mfccs = process_input(file_path, track_duration)
         X_to_predict = mfccs[np.newaxis, ..., np.newaxis]
 
         model = keras.models.load_model("Music_Genre_10_CNN.h5")
