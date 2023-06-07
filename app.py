@@ -14,14 +14,14 @@ def process_input(audio_file):
     HOP_LENGTH = 512
     TRACK_DURATION = track_duration
     SAMPLES_PER_TRACK = SAMPLE_RATE * TRACK_DURATION
-    NUM_SEGMENTS = 8
+    NUM_SEGMENTS = 10
 
     samples_per_segment = int(SAMPLES_PER_TRACK / NUM_SEGMENTS)
     num_mfcc_vectors_per_segment = math.ceil(samples_per_segment / HOP_LENGTH)
 
     signal, sample_rate = librosa.load(audio_file, sr=SAMPLE_RATE, mono=True)
 
-    for d in range(8):
+    for d in range(10):
         start = samples_per_segment * d
         finish = start + samples_per_segment
 
@@ -44,9 +44,7 @@ def predict():
         with open(file_path, "wb") as f:
             f.write(file.read())
 
-        X_to_predict = mfccs[np.newaxis, ..., np.newaxis]
-
-        model = keras.models.load_model("Music_Genre_10_CNN.h5")
+        model = keras.models.load_model("MGC.h5")
         prediction = model.predict(X_to_predict)
         predicted_index = np.argmax(prediction, axis=1)
         predicted_genre = genre_dict[int(predicted_index)]
